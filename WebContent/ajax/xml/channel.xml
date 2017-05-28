@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+<channel>
+        <title>Naver 오픈 API - movie ::'영화'</title>
+        <link>http://search.naver.com</link>
+    <description>Naver Search Result</description>
+        <lastBuildDate>Tue, 25 Jun 2013 16:04:59 +0900</lastBuildDate>
+        <total>887</total>
+        <start>1</start>
+        <display>10</display>
+        <item>
+                <title>무서운 <b>영화</b> 5</title>
+                <link>
+                        http://openapi.naver.com/l?AAAA3ISw6DIBhF4dX8DEkF62PAQFK7Dx6XYBqqIjVh9+XkG53zh1wVrZq0oKWn9UXzSNPESj2g0n5vYB9U5TrbPwYrhbctAM8gjBy8d137Y2AxI6hYykFyIfFuLpjsIv+aG5m7Pf0B9kaFu2sAAAA=
+            </link>
+                <image>
+                        http://imgmovie.naver.com/mdi/mit110/0667/66727_P17_141743.jpg
+                </image>
+                <subtitle>Scary Movie 5</subtitle>
+                <pubDate>2013</pubDate>
+                <director>말콤 D. 리|</director>
+                <actor>애슐리 티스데일|사이먼 렉스|</actor>
+                <userRating>8.59</userRating>
+        </item>
+        <item>
+                <title>보이는 <b>영화</b></title>
+                <link>
+                        http://openapi.naver.com/l?AAAA3ISw6DIBhF4dX8DEkF62PAQFK7Dx6XYBqqIjVh9+XkG53zh1wVrZq0oKWn9UXzSNPESj2g0n5vYB9U5TrbPwYrhbctAM8gjBy8d137Y2AxI6hYykFyIfFuLpjsIv+aG5m7Pf0B9kaFu2sAAAA=
+            </link>
+                <image>
+                        http://imgmovie.naver.com/mdi/mit110/1093/109314_P01_121817.jpg
+                </image>
+                <subtitle>VISIBLE CINEMA</subtitle>
+                <pubDate>2013</pubDate>
+                <director>장은주|</director>
+                <actor/>
+                <userRating>0.00</userRating>
+        </item>
+...
+</channel>
+</rss>

@@ -1,0 +1,21 @@
+{
+	"school" : {
+		"subject" : [{
+			"title" : "javaScript",
+			"time" : "매주 월수금",
+			"teacher" : "임미영"
+		},
+		
+		{
+			"title" : "java",
+			"time" : "10년동안",
+			"teacher" : "종섭"
+		},
+		
+		{
+			"title" : "html",
+			"time" : "한 달에 한번",
+			"teacher" : "나영"
+		}]
+	}
+}

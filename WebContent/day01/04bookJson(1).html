@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+
+<script type="text/javascript" src="./js/jquery-3.1.0.min.js"></script>
+<style type="text/css">
+	table{
+		border: 1;
+	}
+</style>
+<script type="text/javascript">
+$(function(){
+	$("#mybtn").click(function(){
+		$.ajax({
+			url:"../ajax/json/book.json", 
+			type:"get", 
+			dataType:"json", 
+			timeout:30000, 
+			cache:false,
+			success : function(json){
+				
+				$(json).each(function(){
+					var result = this.channel.result;
+					var title = this.channel.title;
+					var totalCount = this.channel.totalCount;
+					var description = this.channel.description;
+					var item = this.channel.item;
+					
+					var author_t = "";
+					var sale_price = "";
+					var cover_s_url = "";
+					var sale_yn = "";
+					var pub_date = "";
+					var link = "";
+					var barcode = "";
+					var etc_author = "";
+					var status_des = "";
+					var title = "";
+					var category = "";
+					var translator = "";
+					var pub_nm = "";
+					var description = "";
+					var isbn = "";
+					var ebook_barcode = "";
+					var isbn13 = "";
+					var cover_l_url = "";
+					var list_price = "";
+					
+					$(item).each(function(){
+						author_t = this.author_t;
+						sale_price = this.sale_price;
+						cover_s_url = this.cover_s_url;
+						sale_yn = this.sale_yn;
+						pub_date = this.pub_date;
+						link = this.link;
+						barcode = this.barcode;
+						etc_author = this.etc_author;
+						status_des = this.status_des;
+						title = this.title;
+						category = this.category;
+						translator = this.translator;
+						pub_nm = this.pub_nm;
+						description = this.description;
+						isbn = this.isbn;
+						ebook_barcode = this.ebook_barcode;
+						isbn13 = this.isbn13;
+						cover_l_url = this.cover_l_url;
+						list_price = this.list_price;
+						
+						var category1 = "저자 : "+author_t+"<br>"+"기타 저자 : "+etc_author+"<br>"+"판매가격 : "+sale_price+"<br>";
+						category1 += "판매 유무 : "+sale_yn+"<br>"+"출판일 : "+pub_date+"<br>"+"출판일 : "+pub_date+"<br>"+"출판일 : "+pub_date+"<br>";
+						//category1 +=
+						//"커버 url : "+cover_s_url+"<br>"+
+						
+						var table = $("<table border='1'>");
+						var tr1 = $("<tr>");
+						
+						var img1 = $("<img>").attr("src", cover_s_url);
+						var td1 = $("<td>").html(img1);
+						var td2 = $("<td>").html(category1);
+						
+						td1.append(img1);
+						tr1.append(td1).append(td2);
+						table.append(tr1);
+						
+						$("#result").append(table);
+					});
+					//<td><img src="aa"></td>
+					
+					
+					
+					
+					
+					var lastBuildDate = this.channel.lastBuildDate;
+					var link = this.channel.link;
+					var generator = this.channel.enerator;
+					
+				});
+				
+				
+				
+			},
+			error : function(xhr, textStatus, errorThrown){
+				$("#result").html(textStatus+":"+xhr.status+":"+errorThrown);
+				//$("div").html("<div>"+textStatus+":"+xhr.status+":"+errorThrown);
+				
+			}
+		});
+	});
+});
+</script>
+</head>
+<body>
+<h1 class="title">$.ajax() 함수를 사용하는 텍스트 읽기</h1>
+		<input type="button" value="txt 파일 가져오기" id="mybtn">
+		<div id="result"></div>
+</body>
+</html>

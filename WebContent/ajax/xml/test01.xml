@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+	<subjects>
+		<subject>
+			<title>javaScript</title>
+			<time>매주 월수금</time>
+			<teacher>임미영</teacher>
+		</subject>
+		<subject>
+			<title>java</title>
+			<time>일년내내</time>
+			<teacher>조아라</teacher>
+		</subject>
+		<subject>
+			<title></title>
+			<time></time>
+			<teacher>창섭</teacher>
+		</subject>
+	</subjects>

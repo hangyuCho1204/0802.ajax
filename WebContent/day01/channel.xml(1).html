@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>$.ajax() 함수를 사용한 읽기</title>
+<script type="text/javascript" src="./js/jquery-3.1.0.min.js"></script>
+<script type="text/javascript">
+	$(function(){
+		$("#mybtn").click(function(){
+			$.ajax({
+				url:"../ajax/xml/channel.xml", 
+				type:"get", 
+				dataType:"xml", 
+				timeout:30000, 
+				cache:false,
+				success : function(xml){					
+					
+					var link = "";
+					var image = "";
+					var subtitle = "";
+					var pubDate = "";
+					var director = "";
+					var actor = "";
+					var userRating = "";
+					
+					$(xml).each(function(){
+						
+						link += $(this).find("link").text();
+						alert(link);
+						image += $(this).find("image").text();
+						subtitle += $(this).find("subtitle").text();
+						pubDate += $(this).find("pubDate").text();
+						director += $(this).find("director").text();
+						actor += $(this).find("actor").text();
+						userRating += $(this).find("userRating").text();
+						
+						
+						var item = $("<item>");
+						var l1 = $("<link>").html(link);
+						var i1 = $("<image>").html(image);
+						var s1 = $("<subtitle>").html(subtitle);
+						var p1 = $("<pubDate>").html(pubDate);
+						var d1 = $("<director>").html(director);
+						var a1 = $("<actor>").html(actor);
+						var u1 = $("<userRating>").html(userRating);
+						
+						
+						item.append(l1).append(i1).append(p1).append(s1).append(p1).append(d1).append(a1).append(u1);
+						
+						$("#result").append(item);
+					});
+				},
+				error : function(xhr, textStatus, errorThrown){
+					$("#result").html(textStatus+":"+xhr.status+":"+errorThrown);
+					//$("div").html("<div>"+textStatus+":"+xhr.status+":"+errorThrown);
+					
+				}
+			});
+		});
+	});
+	/* 정상이면 200(서버에서 성공적으로 응답한 신호)인식해서 데이터를 function에 담고 */
+</script>
+</head>
+<body>
+	<h1 class="title">$.ajax() 함수를 사용하는 텍스트 읽기</h1>
+		<input type="button" value="txt 파일 가져오기" id="mybtn">
+		
+		<div id="result"></div>
+</body>
+</html>

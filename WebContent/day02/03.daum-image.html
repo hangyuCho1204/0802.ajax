@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+<script type="text/javascript" src="./js/jquery-3.1.0.min.js"></script>
+<script id="itemTemplate" type="text/x-jquery-tmpl">
+	<div>
+		<h1 style="font-size : 20px;font-ewight:bold">${q}</h1>
+		<p style='padding : 10px 0'><img src="${result}"></p>
+		<p>{{html pageno}}</p>
+		<p>{{html sort}}</p>
+		<p>{{html output}}</p>
+		<p>{{html apikey}}</p>
+	</div>
+</script>
+<script type="text/javascript">
+
+	//다음 key
+	var api_key = "b7f5f3dfe7c320d0a69b2a543c188da9";
+	//현재 페이지
+	var pageNow = 1;
+	//전체 페이지
+	var pageCount = 0;
+	//검색 키워드
+	var keyword = null;
+	//통신 여부
+	var isLoading = false;
+	
+	function loadImage(k, p){
+		alert("도착");
+		
+		if(isLoading){
+			return false;
+		}
+		isLoading=true;
+		$.getJSON("https://apis.daum.net/search/image?callback=?",{
+			"q" : k, 
+			"result" : 15, 
+			"pageno" : p, 
+			"sort" : "accu", 
+			"output" : "json", 
+			"apikey" : api_key 
+		},function(json){
+			pageCount = json.channel.pageCount;
+			var item = json.channel.item
+			
+			for(var i=0; i < item.length; i++){
+				for(var i=0; i<item.length;i++){
+					item[i].title = item[i].title.replace(/\&lt;/g,"<").replace(/\&gt;/g,">");
+				}
+			}
+				$("#list").append(table);
+				
+			
+		$("#itemTemplate").tmpl(item);
+			
+			
+		}).fail(function(){
+			alert("제대로 안됐어");
+		}).always(function(){//finally
+			isLoading=false;//로딩 아니다
+		});//callback : 남의 도메인의 JSON을 가지고 올 때 필요한 함수.
+	}
+	$(function(){
+		
+		$("form[name='form1']").submit(function(){
+			event.preventDefault();
+			/* 서브밋 이벤트가 실행되어 이동이 되는 것을 막는 이벤트! */
+			keyword = $("input[name='keyword']").val();
+			
+			if(!keyword){
+				alert("검색어를 입력하세요");
+				$("input[name='keyword']").focus();
+				return false;
+			}
+			
+			$("#list").empty();
+			/* 결과 값 출력 전 이전 결과 값 없애는 명령어 */
+			pageNow=1;
+			/* 현재 페이지(첫 번째 페이지) */
+			
+			loadImage(keyword, pageNow);
+			
+		});
+		
+		$(window).scroll(function(){//창에 스크롤이 생겼을 때
+			if($(window).scrollTop()==$(document).height()-$(window).height){/* 스크롤이 맨 밑으로 도착 했다면! == 참*/
+				if(pageNow<pageCount){//pageCount : 전체페이지
+					setTimeout(function(){//1초(1000)후에 아래 작업을 진행 해라는 뜻
+						pageNow++;
+						loadImage(keyword, pageNow);
+					}, 1000);
+				}
+			}
+		});
+	});
+	/* 정상이면 200(서버에서 성공적으로 응답한 신호)인식해서 데이터를 function에 담고 */
+</script>
+</head>
+<body>
+	<h1>daum 이미지 검색</h1>
+	<div>
+		<form name="form1">
+			검색어 입력 <input type="text" name="keyword">
+			<input type="submit" value="검색하기">
+		</form>
+	</div>
+	<ul id="list"></ul>
+	
+</body>
+</html>

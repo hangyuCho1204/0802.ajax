@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>$.ajax() 함수를 사용한 읽기</title>
+<script type="text/javascript" src="js/jquery-3.1.0.min.js"></script>
+<script type="text/javascript" src="js/jquery.tmpl.min.js"></script>
+<script id="itemTemplate" type="text/x-jquery-tmpl">
+	<div>
+		<h1 style="font-size : 20px;font-ewight:bold">${title}</h1>
+		<p style='padding : 10px 0'><img src="${img}"></p>
+		<p>{{html content}}</p>
+	</div>
+</script>
+<!-- <font color='blue'><strong>Template란</strong></font>으로 되어있는 것들은  {{html content}}식으로 해야 출력이 가능 함-->
+<script type="text/javascript">
+	$(function(){
+		var data = {
+				"title" : "jQuery Template 예제", 
+				"img" : "./img/x.jpg", 
+				"content" : "<font color='blue'><strong>Template란</strong></font>, 미리 준비된 HTML의 틀 안에 내용을 채워 넣는 기능입니다."
+		};
+		var div = $("#itemTemplate").tmpl(date);
+		/* tmpl(date)를 itemTemplate같은 틀에 맞추어 만들어라는 뜻 */
+		$("#view").append(div);
+	});
+</script>
+</head>
+<body>
+<!-- http://github.com/BorisMoore/jquery-tmpl -->
+	<h1>템플릿 플러그인</h1>
+	<div id="view"></div>
+	
+	
+</body>
+</html>

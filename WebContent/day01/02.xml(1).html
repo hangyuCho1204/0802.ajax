@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>$.ajax() 함수를 사용한 읽기</title>
+<script type="text/javascript" src="./js/jquery-3.1.0.min.js"></script>
+<script type="text/javascript">
+	$(function(){
+		$("#mybtn").click(function(){
+			$.ajax({
+				url:"../ajax/xml/test01.xml", 
+				type:"get", 
+				dataType:"xml", 
+				timeout:30000, 
+				cache:false,
+				success : function(xml){
+					
+					
+					var title = "";
+					var time = "";
+					var teacher = "";
+					//var title = $xml).find("title").text();
+					//var time = $(xml).find("time").text();
+					//var teacher = $(xml).find("teacher").text();
+					
+					$(xml).each(function(){
+						
+						title+=$(this).find("title").text();
+						time+=$(this).find("time").text();
+						teacher+=$(this).find("teacher").text();
+						
+						var div = $("<div>");
+						var p1 = $("<p>").html(title);
+						var p2 = $("<p>").html(time);
+						var p3 = $("<p>").html(teacher);
+						
+						div.append(p1).append(p2).append(p3);
+						
+						$("#result").append(div);
+					});
+				},
+				error : function(xhr, textStatus, errorThrown){
+					$("#result").html(textStatus+":"+xhr.status+":"+errorThrown);
+					//$("div").html("<div>"+textStatus+":"+xhr.status+":"+errorThrown);
+					
+				}
+			});
+		});
+	});
+	/* 정상이면 200(서버에서 성공적으로 응답한 신호)인식해서 데이터를 function에 담고 */
+</script>
+</head>
+<body>
+	<h1 class="title">$.ajax() 함수를 사용하는 텍스트 읽기</h1>
+		<input type="button" value="txt 파일 가져오기" id="mybtn">
+		
+		<div id="result"></div>
+</body>
+</html>

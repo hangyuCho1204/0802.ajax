@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>$.ajax() 함수를 사용한 읽기</title>
+<script type="text/javascript" src="./js/jquery-3.1.0.min.js"></script>
+<script type="text/javascript">
+	$(function(){
+		$("#mybtn").click(function(){
+			$.ajax({
+				url:"../ajax/json/03.json(1).json", 
+				type:"get", 
+				dataType:"json", 
+				timeout:30000, 
+				cache:false,
+				success : function(json){
+					var title = json.school.subject.title;
+					var time = json.school.subject.time;
+					var teacher = json.school.subject.teacher;
+					
+					var div = $("<div>");
+					var p1 = $("<p>").html(title);
+					var p2 = $("<p>").html(time);
+					var p3 = $("<p>").html(teacher);
+					
+					div.append(p1).append(p2).append(p3);
+					
+					$("#result").append(div);
+					
+				},
+				error : function(xhr, textStatus, errorThrown){
+					$("#result").html(textStatus+":"+xhr.status+":"+errorThrown);
+					//$("div").html("<div>"+textStatus+":"+xhr.status+":"+errorThrown);
+					
+				}
+			});
+		});
+	});
+	/* 정상이면 200(서버에서 성공적으로 응답한 신호)인식해서 데이터를 function에 담고 */
+</script>
+</head>
+<body>
+	<h1 class="title">$.ajax() 함수를 사용하는 텍스트 읽기</h1>
+		<input type="button" value="txt 파일 가져오기" id="mybtn">
+		
+		<div id="result"></div>
+</body>
+</html>
